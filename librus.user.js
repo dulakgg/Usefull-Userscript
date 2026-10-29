@@ -2,34 +2,29 @@
 // @name         Better Librus
 // @namespace    Violentmonkey Scripts
 // @icon         https://portal.librus.pl/images/icon.png
-// @version      1.0.0
+// @version      1.1.0
 // @match        https://librus.pl/*
 // @match        https://*.librus.pl/*
-// @grant GM_registerMenuCommand
-// @grant GM_addStyle
+// @grant        GM_registerMenuCommand
+// @grant        GM_addStyle
+// @grant        GM_getValue
+// @grant        GM_setValue
 // ==/UserScript==
 
-let hideAdsEnabled = true;
-let redirectToLogin = true;
-let betterGradesUI = true;
+let hideAdsEnabled = GM_getValue("hideAdsEnabled", true);
+let redirectToLogin = GM_getValue("redirectToLogin", true);
+let darkMode = GM_getValue("darkMode", true);
 
-GM_registerMenuCommand("Redirect from all librus domains to login", () => {
+const loginUrl = "https://portal.librus.pl/rodzina/synergia/loguj";
+
+GM_registerMenuCommand("Toggle login redirect", () => {
     redirectToLogin = !redirectToLogin;
-
-    if (redirectToLogin) {
-        if (window.location.pathname === "/rodzina") {
-            window.location.href =
-                "https://portal.librus.pl/rodzina/synergia/loguj";
-        }
-    }
+    GM_setValue("redirectToLogin", redirectToLogin); // Save state
+    console.log("Login redirect:", redirectToLogin ? "ON" : "OFF");
 });
 
-if (
-    redirectToLogin &&
-    window.location.pathname === "/rodzina"
-) {
-    window.location.href =
-        "https://portal.librus.pl/rodzina/synergia/loguj";
+if (redirectToLogin && window.location.pathname === "/rodzina") {
+    window.location.replace(loginUrl);
 }
 
 const originalVisibility = new WeakMap();
@@ -39,6 +34,8 @@ const hideAds = () => {
         ".synergia__advertisment--top-container",
         ".synergia__advertisment--side-container-left",
         ".synergia__advertisment--side-container-right",
+        ".article-list",
+        ".widget-container",
         "picture",
         '[style*="height: 10px"][style*="position: relative"]',
         ".skin-addon-footer"
@@ -55,6 +52,7 @@ const hideAds = () => {
 
 GM_registerMenuCommand("Toggle ad hiding", () => {
     hideAdsEnabled = !hideAdsEnabled;
+    GM_setValue("hideAdsEnabled", hideAdsEnabled); // Save state
     hideAds();
 });
 
@@ -67,12 +65,10 @@ observer.observe(document.body, {
     subtree: true
 });
 
-GM_registerMenuCommand("Better Grades UI", () => {
-    betterGradesUI = !betterGradesUI;
-});
-
 (function() {
     'use strict';
+
+    let themeStyle = null;
 
     const discordThemeCSS = `
         :root {
@@ -119,7 +115,6 @@ GM_registerMenuCommand("Better Grades UI", () => {
             background-image: none !important;
         }
         
-
         #page #header #top-banner-container, 
         #page.systema #header #top-banner-container, 
         #top-banner {
@@ -230,11 +225,27 @@ GM_registerMenuCommand("Better Grades UI", () => {
             height: 32px !important;
         }
 
-        .btn-navbar, .app-download__btn {
+        .btn-navbar, .app-download__btn, .dropdown-item--synergia {
             color: #fff !important;
         }
-        
     `;
 
-    GM_addStyle(discordThemeCSS);
+    const toggleTheme = () => {
+        if (darkMode) {
+            if (!themeStyle) {
+                themeStyle = GM_addStyle(discordThemeCSS);
+            }
+        } else if (themeStyle) {
+            themeStyle.remove();
+            themeStyle = null;
+        }
+    };
+
+    GM_registerMenuCommand("Toggle dark mode", () => {
+        darkMode = !darkMode;
+        GM_setValue("darkMode", darkMode);
+        toggleTheme();
+    });
+
+    toggleTheme();
 })();
