@@ -92,9 +92,13 @@ GM_registerMenuCommand("Better Grades UI", () => {
         }
 
         /* Main Body & Backgrounds */
-        body, #page, .container-background, #body {
+        body, #page, .container-background, #body, #viewTitle {
             background-color: var(--discord-bg-primary) !important;
             color: var(--discord-text-normal) !important;
+        }
+
+        .luckyNumber {
+            color: black;
         }
 
         .container-background {
@@ -111,6 +115,7 @@ GM_registerMenuCommand("Better Grades UI", () => {
             background-image: none !important;
         }
         
+
         #page #header #top-banner-container, 
         #page.systema #header #top-banner-container, 
         #top-banner {
@@ -130,9 +135,6 @@ GM_registerMenuCommand("Better Grades UI", () => {
         /* Links */
         a {
             color: var(--discord-text-link) !important;
-        }
-        a:hover {
-            text-decoration: underline !important;
         }
 
         /* Message & Data Table Links */
@@ -188,7 +190,6 @@ GM_registerMenuCommand("Better Grades UI", () => {
 
         /* Buttons & Fold Controls (Discord Blurple) */
         .button, .fold-start, .fold-end, input[type="submit"], input[type="button"], a.button {
-            background-color: var(--discord-blurple) !important;
             color: #ffffff !important;
             border: none !important;
             border-radius: 4px !important;
@@ -205,7 +206,7 @@ GM_registerMenuCommand("Better Grades UI", () => {
         }
 
         /* Popups, Cards & Tooltips */
-        .yellowCard, .titleYellowCard, .cardBody, .yellowCard .content, .tooltip {
+        .yellowCard, .titleYellowCard, .cardBody, .yellowCard .content {
             background-color: var(--discord-bg-secondary) !important;
             color: var(--discord-text-normal) !important;
             border: 1px solid var(--discord-border) !important;
@@ -221,25 +222,8 @@ GM_registerMenuCommand("Better Grades UI", () => {
             border-bottom: 1px solid var(--discord-border) !important;
         }
 
-        /* --- Grade Boxes Visibility & Preservation --- */
-        .grade-box a.ocena {
-            font-weight: bold !important;
-            text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8) !important;
-        }
-
-        /* Soften overly harsh red grade boxes to fit dark theme nicely */
-        .grade-box[style*="background-color:#FF0000"],
-        .grade-box[style*="background-color: #FF0000"],
-        .grade-box[style*="background-color:#ff0000"],
-        .grade-box[style*="background-color: #ff0000"],
-        .detail-grades[style*="background-color: #FF0000"] {
-            background-color: #8b0000 !important;
-        }
-
-        .grade-box[style*="background-color:#FF0000"] a,
-        .grade-box[style*="background-color: #FF0000"] a {
-            color: #ffffff !important;
-            text-shadow: none !important;
+        .ListaWyboru, #language, #tydzien {
+            height: 32px !important;
         }
     `;
 
