@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Librus Ad Hider
+// @name         Better Librus
 // @namespace    Violentmonkey Scripts
 // @icon         https://portal.librus.pl/images/icon.png
 // @version      1.0.0
@@ -92,11 +92,15 @@ GM_registerMenuCommand("Better Grades UI", () => {
         }
 
         /* Main Body & Backgrounds */
-        body, #page, .container-background, #body, #viewTitle {
+        body, #page, .container-background, #body, #viewTitle, .title, .footer {
             background-color: var(--discord-bg-primary) !important;
             color: var(--discord-text-normal) !important;
         }
 
+        .synergia__advertisment--content-wrapper {
+            items-align: center !important;
+            justify-content: center !important;
+        }
         .luckyNumber {
             color: black;
         }
@@ -225,6 +229,11 @@ GM_registerMenuCommand("Better Grades UI", () => {
         .ListaWyboru, #language, #tydzien {
             height: 32px !important;
         }
+
+        .btn-navbar, .app-download__btn {
+            color: #fff !important;
+        }
+        
     `;
 
     GM_addStyle(discordThemeCSS);
