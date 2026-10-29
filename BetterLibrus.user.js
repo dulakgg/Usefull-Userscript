@@ -1,8 +1,14 @@
 // ==UserScript==
 // @name         Better Librus
-// @namespace    Violentmonkey Scripts
+// @namespace    https://github.com/dulakgg/Usefull-Userscript
+// @version      1.0.0
+// @description  Useful improvements for Librus, including dark mode and ad removal.
+// @author       dulakgg
 // @icon         https://portal.librus.pl/images/icon.png
-// @version      1.1.0
+// @homepageURL  https://github.com/dulakgg/Usefull-Userscript
+// @supportURL   https://github.com/dulakgg/Usefull-Userscript/issues
+// @updateURL    https://github.com/dulakgg/Usefull-Userscript/blob/main/BetterLibrus.user.js
+// @downloadURL  https://github.com/dulakgg/Usefull-Userscript/blob/main/BetterLibrus.user.js
 // @match        https://librus.pl/*
 // @match        https://*.librus.pl/*
 // @grant        GM_registerMenuCommand
