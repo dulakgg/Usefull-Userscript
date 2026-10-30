@@ -11,6 +11,7 @@
 // @downloadURL  https://github.com/dulakgg/Usefull-Userscript/blob/main/BetterLibrus.user.js
 // @match        https://librus.pl/*
 // @match        https://*.librus.pl/*
+// @license MIT
 // @grant        GM_registerMenuCommand
 // @grant        GM_addStyle
 // @grant        GM_getValue
